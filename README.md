@@ -1,1 +1,1 @@
-# bc-7-pairprogram
+# bc-7-pair-program
