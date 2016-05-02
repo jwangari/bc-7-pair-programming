@@ -10,4 +10,10 @@
 <div class="col-md-4">
 	{{ wtf.quick_form(form) }}
 </div>
+<p>
+	Don't have an account yet?
+	<a href="{{ url_for('auth.signup') }}">
+		Click here to create account
+	</a>
+</p>
 {% end block %}
