@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, flash
 from flask.ext.login import login_user, logout_user, login_required
-from auth/forms import LogInForm, SignUpForm
 from . import auth
+from . forms import LogInForm, SignUpForm
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
@@ -23,6 +23,11 @@ def login():
 
 @auth.route('/signup', methods=['GET', 'POST'])
 def signup():
+	'''
+		This function facilitates registration of new users. 
+			-When the sign up form is submitted and validated, 
+			 a new user is added to the database
+	'''
 	form = SignUpForm()
 	if form.validate_on_submit():
 		user = User(email=form.email.data,
