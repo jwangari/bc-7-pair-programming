@@ -17,9 +17,9 @@ class User(UserMixin, db.Model):
 		raise AttributeError('password cannot be read (write-only attribute)')
 
 	@password.setter
-		'''
-		'''
 	def password(self, password):
+		'''
+		'''
 		self.password_hash = generate_password_hash(password)
 
 
