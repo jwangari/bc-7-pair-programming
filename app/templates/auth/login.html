@@ -1,19 +1,22 @@
-{% extends "base.html"}
+{% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block title %}Pair App{% endblock%}
 {% block page_content %}
 
-<div class="page-header">
-	<h1> Login </h1>
-</div>
-<div class="col-md-4">
-	{{ wtf.quick_form(form) }}
-</div>
-<p>
-	Don't have an account yet?
-	<a href="{{ url_for('auth.signup') }}">
-		Click here to create account
-	</a>
-</p>
-{% end block %}
+		<div class="col-md-10">
+        <div class="page_header">
+            <h1>Login</h1>
+        </div>
+        <div class="col-md-8">
+            {{ wtf.quick_form(form) }}
+        <p>
+            Do you have an account?
+            <a href="{{ url_for('auth.signup') }}">
+                Click here to signup
+            </a>
+        </p>
+    </div>
+    </div>
+
+{% endblock %}

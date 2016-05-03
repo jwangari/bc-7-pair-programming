@@ -1,40 +1,62 @@
 {% extends "bootstrap/base.html" %}
-
-{% block title %}Pair Programming{% endblock %}
-
-{% block head %}
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+{% block title %}Document Management{% endblock %}
+{% block head %} {{ super() }}
+    
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename="css/style.css") }}" />
+   
 {% endblock %}
+{% block body %}
+    {% if not current_user.is_authenticated %}
+        <div class="bg">
+            <div>
+                <!-- <img src="{{ url_for('static',filename='images/biz.jpg') }}" id="bg" alt=""> -->
+            </div>
+            <div>
 
-{% block navbar %}
-<div class="navbar navbar-inverse" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{{ url_for('main.index') }}">PairProgram</a>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                    {% if current_user.is_authenticated %}
-                        <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
-                    {% else %}
-                        <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
-                    {% endif %}
-            </ul>
-            <ul>
-                {% else %}
-                	<li><a href="{{ url_for('auth.signup') }}">Create Account</a></li>
-                {% endif %}
-            </ul>
-        </div>
-    </div>
-</div>
-{% endblock %}
+
+            {% endif %}
+            {% block navbar %}
+                <header>
+                <div class="navbar navbar-inverse" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle"
+                        data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/">PairProgram</a>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            {% if current_user.is_authenticated %}
+                                <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
+                            {% else %}
+                                <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
+                            {% endif %}
+                    </ul>
+                    </div>
+                </div>
+                </div>
+                    </header>
+                {% endblock navbar %}
+                {% block content %}
+                    <div class="container">
+                        {% for message in get_flashed_messages() %}
+                            <div class="alert alert-warning">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                {{ message }}
+                            </div>
+                            {% endfor %} {% block page_content %}{% endblock %}
+                        </div>
+                    {% endblock content %}
+                    {% block scripts %}
+                        {{ super() }} 
+                    {% endblock scripts %}
+                </div>
+            </div>
+        {% endblock body %}
 
    

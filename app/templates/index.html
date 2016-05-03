@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+{% block page_content %}
+<div class="container">
+
+    <p>
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-danger">
+        {% if dismissable %}
+             <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {% endif %}
+             {{ message }}
+        </div>
+    {% endfor %}
+
+    <div class="center jumbotron">     
+        <h2> Pair Program</h2><br>
+        <p>Lets do this</p>
+        <p><a class="btn btn-primary btn-lg login-btn" href="/auth/login" role="button">Login to Continue!</a></p>
+    </div>
+{% endblock %}
