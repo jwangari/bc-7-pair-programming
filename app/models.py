@@ -36,4 +36,12 @@ class User(UserMixin, db.Model):
 		'''
 		return User.query.get(int(user_id))
 
+# class ProgramSession():
+# 	__tablename__ = 'session'
+
+# 	id = db.Column(db.Integer, primary_key=True)
+# 	session_name = db.Column(db.String(128), unique=True, index=True)
+#     session_URL = db.Column(db.String(128))
+#     program_lang = db.Column(db.String(128))
+
 	
