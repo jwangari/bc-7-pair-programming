@@ -1,7 +1,7 @@
-var rootRef = new Firebase('https://pair39.firebaseio.com/');
+var rootRef = new Firebase('https://pairprogram.firebaseio.com/');
 username = $('#username').text();
 session_id = $('#session_id').text();
-sessionsRef = 'https://pair39.firebaseio.com/'
+sessionsRef = 'https://pairprogram.firebaseio.com/'
 
 $(document).ready(function() {
     url_ = '';
@@ -25,7 +25,7 @@ $(document).ready(function() {
 
     }, 3000);
 
-    var usersAddr = 'https://pair39.firebaseio.com/users';
+    var usersAddr = 'https://pairprogram.firebaseio.com/users';
     var onlineUsers = []
     var allUsers = []
     var showOnlineUsers = function(users, exists) {
@@ -107,7 +107,7 @@ var configEditor = function() {
 
 //get's a firebase ref, and adds a hash to the url
 var getFirebaseRef = function() {
-    var fbRef = new Firebase('https://pair39.firebaseio.com/');
+    var fbRef = new Firebase('https://pairprogram.firebaseio.com/');
     urlHash = window.location.hash.replace(/#/g, '');
     if (urlHash) {
         fbRef = fbRef.child(urlHash);
@@ -126,7 +126,7 @@ var saveUserSession = function() {
         session: window.location.hash.replace(/#/g, '')
     }
 
-    var rootRef = new Firebase('https://pair39.firebaseio.com/');
+    var rootRef = new Firebase('https://pairprogram.firebaseio.com/');
     childRef = $('#username').text();
     var sessionsRef = rootRef.child(childRef);
     pushOnline(sessionInfo, sessionsRef);
