@@ -19,7 +19,7 @@ def login():
 		user = User.query.filter_by(email=form.email.data).first()
 		if user is not None and user.verify_password(form.password.data):
 			login_user(user, form.keep_on.data)
-			return redirect(url_for('main.index'))
+			return redirect(url_for('main.home'))
 		flash('Invalid username and password combination.')
 	return render_template('auth/login.html', form=form)
 
@@ -37,7 +37,7 @@ def signup():
 					password=form.password.data)
 		db.session.add(user)
 		db.session.commit()
-		return redirect(url_for('main.index'))
+		return redirect(url_for('main.home'))
 	return render_template('auth/signup.html', form=form)
 
 @auth.route('/logout')
@@ -50,6 +50,6 @@ def logout():
 			and redirect to the home page.
 	'''
 	logout_user()
-	flash('You have been logged out.')
+	#flash('You have been logged out.')
 	return redirect(url_for('main.index'))
 
