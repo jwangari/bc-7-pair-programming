@@ -36,7 +36,7 @@ def signup():
 		db.session.add(user)
 		db.session.commit()
 		return redirect(url_for('main.index'))
-	return render_template('signin.html')
+	return render_template('auth/signup.html', form=form)
 
 @auth.route('/logout')
 @login_required
