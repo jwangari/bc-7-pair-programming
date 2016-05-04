@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Pair App{% endblock%}
+{% block page_content %}
+
+	<div class="page-header">
+		<h1> Chat </h1>
+	</div>
+		<script>
+		// Create a new Firebase reference, and a new instance of the Login client
+		var chatRef = new Firebase('https://pairprogram.firebaseio.com/chat');
+
+		function login() {
+		  chatRef.authWithOAuthPopup("twitter", function(error, authData) {
+		    if (error) {
+		      console.log(error);
+		    }
+		  });
+		}
+
+		chatRef.onAuth(function(authData) {
+		  // Once authenticated, instantiate Firechat with our user id and user name
+		  if (authData) {
+		    initChat(authData);
+		  }
+		});
+		</script>
+
+		<a href="{{ url_for('main.chat_session') }}" onclick='login();'>Login with Twitter</a>
+	</div>
+	
+{% endblock %}
