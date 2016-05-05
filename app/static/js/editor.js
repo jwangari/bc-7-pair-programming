@@ -11,7 +11,7 @@ $(document).ready(function() {
         // send session details to server
         $.ajax({
             type: 'POST',
-            url: '/fromajax',
+            url: '/sessions',
             data: JSON.stringify({
                 id_: session_id,
                 username: username,
@@ -86,47 +86,49 @@ $(document).ready(function() {
     pollUsers()
 });
 
-var configEditor = function() {
-    // Get a firebase reference
-    var firepadRef = getFirebaseRef();
-
-    //// Create ACE
-    var editor = ace.edit('firepad');
-    editor.setTheme('ace/theme/monokai');
-    editor.setFontSize(20)
-    var session = editor.getSession();
-    session.setUseWrapMode(true);
-    session.setUseWorker(false);
-    session.setMode('ace/mode/python');
-
-    // start a firepad instance
-    var firepad = Firepad.fromACE(firepadRef, editor, {
-        defaultText: ''
-    });
+function init() {
+  //// Initialize Firebase.
+  var firepadRef = getExampleRef();
+  // TODO: Replace above line with:
+  // var firepadRef = new Firebase('<YOUR FIREBASE URL>');
+  //// Create ACE
+  var editor = ace.edit("firepad");
+  editor.setTheme("ace/theme/textmate");
+  var session = editor.getSession();
+  session.setUseWrapMode(true);
+  session.setUseWorker(false);
+  session.setMode("ace/mode/javascript");
+  //// Create Firepad.
+  var firepad = Firepad.fromACE(firepadRef, editor, {
+    defaultText: ' '
+  });
 }
-
-//get's a firebase ref, and adds a hash to the url
-var getFirebaseRef = function() {
-    var fbRef = new Firebase('https://pairprogram.firebaseio.com/');
-    urlHash = window.location.hash.replace(/#/g, '');
-    if (urlHash) {
-        fbRef = fbRef.child(urlHash);
-    } else {
-
-        fbRef = fbRef.push(); // generate unique location.
-        window.location = window.location + '#' + fbRef.key(); // add it as a hash to the URL.
-    }
-    setTimeout(saveUserSession, 5000)
-    return fbRef;
+// Helper to get hash from end of URL or generate a random one.
+function getExampleRef() {
+  var ref = new Firebase('https://pairprogram.firebaseio.com/');
+  var hash = window.location.hash.replace(/#/g, '');
+  if (hash) {
+    ref = ref.child(hash);
+  } else {
+    ref = ref.push(); // generate unique location.
+    window.location = window.location + '#' + ref.key(); // add it as a hash to the URL.
+  }
+  // if (typeof console !== 'undefined')
+  //   console.log('Firebase data: ', ref.toString());
+  setTimeout(function() {
+    saveUserSession();
+    console.log('Saving session');
+    }, 5000);
+  return ref;
 }
-
+window.onload = init;
 var saveUserSession = function() {
     sessionInfo = {
         username: $('#username').text(),
         session: window.location.hash.replace(/#/g, '')
     }
 
-    var rootRef = new Firebase('https://pair39.firebaseio.com/');
+    var rootRef = new Firebase('https://pairprogram.firebaseio.com/');
     childRef = $('#username').text();
     var sessionsRef = rootRef.child(childRef);
     pushOnline(sessionInfo, sessionsRef);

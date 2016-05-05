@@ -6,7 +6,7 @@ from .. import db
 from..models import User, ProgramSession
 from . forms import NewSessionForm
 from firebase import firebase
-
+from app.email import send_email
 
 session_url = ""
 
@@ -43,12 +43,12 @@ def invite():
             if str(user.username+' ') == str(request.form.get('usernames')):
                 print user.username
                 session_link = request.form.get('session_link')
-                send_email(current_user.email, user.email, "Invitation", 'email/invite', user=user,  current_user=current_user, session_link=session_link)
-                flash('A confirmation email has been sent to you by email.')
+                send_email(current_user.email, user.email, "Invitation", 'mail/invite', user=user,  current_user=current_user, session_link=session_link)
+                flash('An invitation has been sent to user.')
                 print str(session_link)
     return render_template('main/home.html', users=users)
 
-@main.route('/sessions')
+@main.route('/sessions', methods=['GET', 'POST'])
 @login_required
 def my_session():
         firebase_ = firebase.FirebaseApplication('https://pairprogram.firebaseio.com/')
@@ -56,8 +56,9 @@ def my_session():
         sess_hash = []
         for item in results:
             for first_name in results[item]:
-               if str(current_user.username) == str(results[item][first_name].get('username')).strip():
-                   sess_hash.append(str(results[item][first_name].get('session')))
+                if str(current_user.username) == str(results[item][first_name].get('username')).strip():
+                    # print results[item][first_name].get('username')
+                    sess_hash.append(str(results[item][first_name].get('session')))
         return render_template('main/my_session.html', sess_hash=sess_hash)
 
 @main.route('/edit/<hashed>')
@@ -69,11 +70,15 @@ def edit(hashed):
 @main.route('/delete/<hashed>')
 def delete(hashed):
     firebase_ = firebase.FirebaseApplication('https://pairprogram.firebaseio.com/')
-    results = firebase_.get(current_user.username + '  ', None)
+    results = firebase_.get('https://pairprogram.firebaseio.com/', None)
     for item in results:
-        for first_name in results[item]:
-            if results[item].get('session') == hashed:
-                firebase_.delete(current_user.username + '  ', item)
+        for n in results[item]:
+            if str(current_user.username) == str(results[item][n].get('username')).strip():
+                print results[item][n].get('session')
+                print "Hashed -->"+hashed
+                if results[item][n].get('session') == hashed:
+                    print True
+                    firebase_.delete(current_user.username, '1')
     return redirect(url_for('main.my_session'))
 
 
@@ -86,15 +91,3 @@ def chat():
 @login_required
 def chat_session():
     return render_template('main/chat_session.html')
-
-
-
-
-
-
-
-
-
-
-
-
