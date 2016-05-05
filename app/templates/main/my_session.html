@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<div class="container">
+  <h2>My Sessions</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Sessions</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for item in sess_hash %}
+            <tr>
+                <td>{{ item }}</td>
+                <td><a href="{{ url_for('main.edit', hashed=item) }}">Edit</a></td>
+                <td><a href="{{ url_for('main.delete', hashed=item) }}">Delete</a></td>
+                
+            </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

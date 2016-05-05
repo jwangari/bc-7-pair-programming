@@ -8,15 +8,17 @@ from . forms import NewSessionForm
 from firebase import firebase
 
 
+session_url = ""
+
 @main.route('/', methods=['GET', 'POST'])
-def index():
+def start():
 	
-	return render_template('index.html')
+	return render_template('start.html')
 
-@main.route('/home', methods=['GET', 'POST'])
-def home():
-
-    return render_template('main/home.html')
+@main.route('/index', methods=['GET', 'POST'])
+def index():
+    
+    return render_template('index.html')
 
 @main.route('/new_session', methods=['GET', 'POST'])
 def new_session():
@@ -29,8 +31,51 @@ def new_session():
 			user.sessions.append(sess)
 			db.session.add(user)
 			db.session.commit()
-		return redirect(url_for('main.home'))
+		return redirect(url_for('main.invite'))
 	return render_template('main/new_session.html', form=form)
+
+@main.route('/invite', methods=['GET', 'POST'])
+@login_required
+def invite():
+    users = User.query.all()
+    if request.method == 'POST':
+        for user in users:
+            if str(user.username+' ') == str(request.form.get('usernames')):
+                print user.username
+                session_link = request.form.get('session_link')
+                send_email(current_user.email, user.email, "Invitation", 'email/invite', user=user,  current_user=current_user, session_link=session_link)
+                flash('A confirmation email has been sent to you by email.')
+                print str(session_link)
+    return render_template('main/home.html', users=users)
+
+@main.route('/sessions')
+@login_required
+def my_session():
+        firebase_ = firebase.FirebaseApplication('https://pairprogram.firebaseio.com/')
+        results = firebase_.get('https://pairprogram.firebaseio.com/', None)
+        sess_hash = []
+        for item in results:
+            for first_name in results[item]:
+               if str(current_user.username) == str(results[item][first_name].get('username')).strip():
+                   sess_hash.append(str(results[item][first_name].get('session')))
+        return render_template('main/my_session.html', sess_hash=sess_hash)
+
+@main.route('/edit/<hashed>')
+def edit(hashed):
+    global session_url
+    session_url = "http://127.0.0.1:5000/invite#"+hashed
+    return redirect(session_url)
+
+@main.route('/delete/<hashed>')
+def delete(hashed):
+    firebase_ = firebase.FirebaseApplication('https://pairprogram.firebaseio.com/')
+    results = firebase_.get(current_user.username + '  ', None)
+    for item in results:
+        for first_name in results[item]:
+            if results[item].get('session') == hashed:
+                firebase_.delete(current_user.username + '  ', item)
+    return redirect(url_for('main.my_session'))
+
 
 @main.route('/chat')
 @login_required

@@ -1,0 +1,7 @@
+Dear{{ user.username }},
+Welcome to PairProgram!
+You have been invited to pair program with {{ current_user.username }} 
+To join the session <a href="{{ session_link }}">click here</a>
+Sincerely,
+The PairProgram Team
+Note: replies to this email address are not monitored
