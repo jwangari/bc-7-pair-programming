@@ -22,9 +22,9 @@
     <link rel='stylesheet' href='https://cdn.firebase.com/libs/firechat/2.0.1/firechat.min.css' />
     <script src='https://cdn.firebase.com/libs/firechat/2.0.1/firechat.min.js'></script>
     
-        <style>
-      html { height: 100%; }
-      body { margin: 0; height: 100%; position: relative; }
+    <style>
+    html { height: 100%; }
+    body { margin: 0; height: 100%; position: relative; }
     /* Height / width / positioning can be customized for your use case.
        For demo purposes, we make firepad fill the entire browser. */
     #firepad{
@@ -48,12 +48,7 @@
         -webkit-box-shadow: 0 5px 25px #666;
         -moz-box-shadow: 0 5px 25px #666;
         box-shadow: 0 5px 25px #666;
-      }
-    
-    
-    </style>
-    <!-- Custom CSS -->
-    <style>
+      } 
       
     </style>
    
@@ -110,48 +105,12 @@
         <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js')}}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='js/editor.js') }}"></script>
-         <!--  <script>
-          function init() {
-          //// Initialize Firebase.
-          var firepadRef = getExampleRef();
-          // TODO: Replace above line with:
-          // var firepadRef = new Firebase('<YOUR FIREBASE URL>');
-          //// Create ACE
-          var editor = ace.edit("firepad");
-          editor.setTheme("ace/theme/textmate");
-          var session = editor.getSession();
-          session.setUseWrapMode(true);
-          session.setUseWorker(false);
-          session.setMode("ace/mode/javascript");
-          //// Create Firepad.
-          var firepad = Firepad.fromACE(firepadRef, editor, {
-            defaultText: ' '
-          });
-        }
-        // Helper to get hash from end of URL or generate a random one.
-        function getExampleRef() {
-          var ref = new Firebase('https://pair39.firebaseio.com/');
-          var hash = window.location.hash.replace(/#/g, '');
-          if (hash) {
-            ref = ref.child(hash);
-          } else {
-            ref = ref.push(); // generate unique location.
-            window.location = window.location + '#' + ref.key(); // add it as a hash to the URL.
-          }
-          if (typeof console !== 'undefined')
-            console.log('Firebase data: ', ref.toString());
-          return ref;
-        }
-        window.onload = init;
-        
-        </script> -->
-            <script>
+        <script>
                 function initChat(authData) {
                 var chat = new FirechatUI(chatRef, document.getElementById('firechat-wrapper'));
                 chat.setUser(authData.uid, authData[authData.provider].displayName);
                   }
-            </script>
-            
+        </script>        
         
             
     {% endblock %}
