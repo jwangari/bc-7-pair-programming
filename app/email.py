@@ -12,8 +12,7 @@ def send_mail_conc(app, msg):
 
 def send_email(subj, sender, content, to, **kwargs):
     app = current_app._get_current_object()
-    msg = Message(app.config['PAIRPRGGRAM_MAIL_SUBJECT_PREFIX'] + ' ' + subJ,
-                  sender=sender, recipients=[to])
+    msg = Message(subj,sender=sender, recipients=[to])
     msg.body = render_template(template + '.txt', **kwargs)
     msg.html = render_template(template + '.html', **kwargs)
     t = Thread(target=send_mail_conc, args=[app, msg])

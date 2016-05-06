@@ -78,9 +78,8 @@ def delete(hashed):
                 print "Hashed -->"+hashed
                 if results[item][n].get('session') == hashed:
                     print True
-                    firebase_.delete(current_user.username, '1')
+                    firebase_.delete(current_user.username + '  ', item)
     return redirect(url_for('main.my_session'))
-
 
 @main.route('/chat')
 @login_required

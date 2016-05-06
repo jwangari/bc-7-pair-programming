@@ -61,7 +61,7 @@ $(document).ready(function() {
         // send invite details to server
         $.ajax({
             type: 'POST',
-            url: '/sendmail',
+            url: '/invite',
             data: JSON.stringify({
                 id_: session_id,
                 username_: username,
@@ -103,6 +103,7 @@ function init() {
     defaultText: ' '
   });
 }
+
 // Helper to get hash from end of URL or generate a random one.
 function getExampleRef() {
   var ref = new Firebase('https://pairprogram.firebaseio.com/');
@@ -122,6 +123,7 @@ function getExampleRef() {
   return ref;
 }
 window.onload = init;
+
 var saveUserSession = function() {
     sessionInfo = {
         username: $('#username').text(),
