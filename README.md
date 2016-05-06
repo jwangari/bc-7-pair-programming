@@ -1,7 +1,7 @@
 ## PairProgram
 ##### Andela Kenya Class VII Boot Camp Project
 
-PairProgram is a pair programming app powered by Flask, Firebase and Firepad. It facilitates multiple programmers to work on the same code file in real time.
+PairProgram is a pair programming app powered by Flask, Firebase and Firepad. It facilitates multiple programmers to work on the same code file in real time. [Click me](http://pprogram.herokuapp.com)
 
 ### Required features
 
