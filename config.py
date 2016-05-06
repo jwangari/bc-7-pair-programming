@@ -6,7 +6,7 @@ class Config:
 	SQLALCHEMY_COMMIT_ON_TEARDOWN = 'True'
 	SQLALCHEMY_TRACK_MODIFICATIONS  = True
 	PAIRPROGRAM_MAIL_SUBJECT_PREFIX = '[pairprogram]'
-	PAIRPROGRAM_MAIL_SENDER = 'pairprogram Admin <kareyfifi@gmail.com>'
+	PAIRPROGRAM_MAIL_SENDER = 'Admin <warugujoy@gmail.com>'
 	PAIRPROGRAM_ADMIN = os.environ.get('PAIRPROGRAM_ADMIN')
 
 	@staticmethod

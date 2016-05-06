@@ -36,5 +36,5 @@ PairProgram is a pair programming app powered by Flask, Firebase and Firepad. It
 
 * Deleting sessions is not working at the moment.
 * Chatting functionality has yet to be implemented.
-* Issues with the invite.
+* Issues with the invite. When you invite someone page reloads and goes to another session to get to the same session you need to paste link onto the browser URL.
 

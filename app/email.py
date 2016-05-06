@@ -10,11 +10,13 @@ def send_mail_conc(app, msg):
         mail.send(msg)
 
 
-def send_email(subj, sender, content, to, **kwargs):
+def send_email(sender, to, subject, template, **kwargs):
+    print 'Sending mail'
     app = current_app._get_current_object()
-    msg = Message(subj,sender=sender, recipients=[to])
+    msg = Message(app.config['PAIRPROGRAM_MAIL_SUBJECT_PREFIX'] + ' ' + subject,
+                  sender=sender, recipients=[to])
     msg.body = render_template(template + '.txt', **kwargs)
     msg.html = render_template(template + '.html', **kwargs)
-    t = Thread(target=send_mail_conc, args=[app, msg])
-    t.start()
-    return t
+    thr = Thread(target=send_mail_conc, args=[app, msg])
+    thr.start()
+    return thr

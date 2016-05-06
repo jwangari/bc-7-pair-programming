@@ -40,14 +40,15 @@ def invite():
     users = User.query.all()
     if request.method == 'POST':
         for user in users:
-            if str(user.username+' ') == str(request.form.get('usernames')):
-                print user.username
+            print user.username == str(request.form.get('usernames'))
+            if str(user.username) == str(request.form.get('usernames')):
                 session_link = request.form.get('session_link')
-                send_email(current_user.email, user.email, "Invitation", 'mail/invite', user=user,  current_user=current_user, session_link=session_link)
-                flash('An invitation has been sent to user.')
+                send_email(current_user.email, user.email, "Join me in my session!", 'mail/invite', user=user,  current_user=current_user, session_link=session_link)
                 print str(session_link)
-    return render_template('main/home.html', users=users)
+                print True
 
+    return render_template('main/home.html', users=users)
+ 
 @main.route('/sessions', methods=['GET', 'POST'])
 @login_required
 def my_session():
@@ -78,6 +79,7 @@ def delete(hashed):
                 print "Hashed -->"+hashed
                 if results[item][n].get('session') == hashed:
                     print True
+                    print current_user.username
                     firebase_.delete(current_user.username + '  ', item)
     return redirect(url_for('main.my_session'))
 
