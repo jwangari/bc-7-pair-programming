@@ -17,20 +17,20 @@ PairProgram is a pair programming app powered by Flask, Firebase and Firepad. It
 
 1. Clone this repository
 
-`git clone https://github.com/JoyWangari/bc-7-pair-programming.git`
+	`git clone https://github.com/JoyWangari/bc-7-pair-programming.git`
 
 2. Do a pip install for the dependancies
 
-`pip install -r requirements.txt`
+	`pip install -r requirements.txt`
 
 3. Initialize your database and migrate the database models.
 
-`python manage.py db init`
-`python manage.py db upgrade`
+	`python manage.py db init`
+	`python manage.py db upgrade`
 
 4. THen finally, run a development server.
 
-`python manage.py runserver`
+	`python manage.py runserver`
 
 ## Issues
 
