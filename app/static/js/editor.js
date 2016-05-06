@@ -15,7 +15,7 @@ $(document).ready(function() {
             data: JSON.stringify({
                 id_: session_id,
                 username: username,
-                session_url: ('http://localhost:5000' + url_),
+                session_url: ('http://pprogram.herokuapp.com' + url_),
             }, null, '\t'),
             contentType: 'application/json;charset=UTF-8',
             success: function(result) {
@@ -65,7 +65,7 @@ $(document).ready(function() {
             data: JSON.stringify({
                 id_: session_id,
                 username_: username,
-                session_link: 'http://localhost:5000' + window.location.pathname + window.location.hash,
+                session_link: 'http://pprogram.herokuapp.com' + window.location.pathname + window.location.hash,
             }, null, '\t'),
             contentType: 'application/json;charset=UTF-8',
             success: function(result) {
