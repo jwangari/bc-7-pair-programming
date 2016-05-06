@@ -65,7 +65,7 @@ $(document).ready(function() {
             data: JSON.stringify({
                 id_: session_id,
                 username_: username,
-                session_addr: '' + window.location.pathname + window.location.hash,
+                session_link: 'http://localhost:5000' + window.location.pathname + window.location.hash,
             }, null, '\t'),
             contentType: 'application/json;charset=UTF-8',
             success: function(result) {
