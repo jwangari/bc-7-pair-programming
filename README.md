@@ -13,7 +13,7 @@ PairProgram is a pair programming app powered by Flask, Firebase and Firepad. It
 	* Write code within editor
 	* Chat with other users on the session
 
-## An instance of PairProgram on your machine
+### An instance of PairProgram on your machine
 
 1. Clone this repository
 
@@ -28,7 +28,7 @@ PairProgram is a pair programming app powered by Flask, Firebase and Firepad. It
 	`python manage.py db init`
 	`python manage.py db upgrade`
 
-4. THen finally, run a development server.
+4. Then finally, run a development server.
 
 	`python manage.py runserver`
 
