@@ -1,9 +1,9 @@
-# PairProgram
-### Andela Kenya Class VII Boot Camp Project
+## PairProgram
+##### Andela Kenya Class VII Boot Camp Project
 
 PairProgram is a pair programming app powered by Flask, Firebase and Firepad. It facilitates multiple programmers to work on the same code file in real time.
 
-# Required features
+### Required features
 
 * A user is able to login and sign up.
 * A user can create a new pair programming sessions.
@@ -13,26 +13,26 @@ PairProgram is a pair programming app powered by Flask, Firebase and Firepad. It
 	* Write code within editor
 	* Chat with other users on the session
 
-# Getting an instance of PairProgram up and running on your machine
+## An instance of PairProgram on your machine
 
 1. Clone this repository
 
-[Gitclone](git clone https://github.com/JoyWangari/bc-7-pair-programming.git)
+`git clone https://github.com/JoyWangari/bc-7-pair-programming.git`
 
 2. Do a pip install for the dependancies
 
-> pip install -r requirements.txt
+`pip install -r requirements.txt`
 
 3. Initialize your database and migrate the database models.
 
-> python manage.py db init
-> python manage.py db upgrade
+`python manage.py db init`
+`python manage.py db upgrade`
 
 4. THen finally, run a development server.
 
-> python manage.py runserver
+`python manage.py runserver`
 
-# Issues
+## Issues
 
 * Deleting sessions is not working at the moment.
 * Chatting functionality has yet to be implemented.
