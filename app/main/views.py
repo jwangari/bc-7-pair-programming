@@ -64,7 +64,7 @@ def my_session():
 @main.route('/edit/<hashed>')
 def edit(hashed):
     global session_url
-    session_url = "http://127.0.0.1:5000/invite#"+hashed
+    session_url = "http://pprogram.herokuapp.com/invite#"+hashed
     return redirect(session_url)
 
 @main.route('/delete/<hashed>')
